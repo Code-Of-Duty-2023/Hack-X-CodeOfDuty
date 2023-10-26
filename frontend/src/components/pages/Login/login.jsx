@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./login.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const handleLoginSubmit = () => {};
 
 const Login = () => {
@@ -22,13 +24,28 @@ const Login = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const response = await axios.post("http://localhost:8000/users/login", {
-      email,
-      password,
-    });
-    await localStorage.setItem("token", response.data.token);
-    navigate("/");
+    try {
+      const response = await axios.post("http://localhost:8000/users/login", {
+        email,
+        password,
+      });
+      await localStorage.setItem("token", response.data.token);
+      navigate("/");
+    } catch (e) {
+      console.error(e.response.data);
+      return toast.error(e.response.data, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
+
   return (
     <div>
       <section className="loginContainer">
@@ -93,12 +110,22 @@ const Login = () => {
             )}
 
             {/* footer div */}
-            <div className="col-md-12">
-             
-            </div>
+            <div className="col-md-12"></div>
           </div>
         </div>
       </section>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

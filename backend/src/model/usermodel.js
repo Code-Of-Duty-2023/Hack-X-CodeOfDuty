@@ -36,16 +36,17 @@ userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({ email: email });
 
   if (!user) {
-    throw new Error("Unable to login");
+    return { error: 'Unable to login', user:{}};
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
 
   if (!isMatch) {
-    throw new Error("Password not matched ,Unable to login");
-  }
+    return { error: 'Password not matched ,Unable to login', user:{}};
 
-  return user;
+  }
+  return { error: '', user};
+
 };
 
 //hash the plain text password before saving

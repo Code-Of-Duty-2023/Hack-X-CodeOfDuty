@@ -20,35 +20,36 @@ const PersonalRecommend = () => {
   const [color, setColor] = useState(null);
   const [chartdata, setChartData] = useState(null);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(async (res) => {
-      const response = await axios.get(
-        `https://api.breezometer.com/air-quality/v2/current-conditions?lat=${res.coords.latitude}&lon=${res.coords.longitude}&key=5d987a480bbf4894bef1059af925ace0&features=breezometer_aqi,local_aqi,health_recommendations,sources_and_effects,pollutants_concentrations,pollutants_aqi_information`
-      );
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(async (res) => {
+  //     console.log(res)
+  //     const response = await axios.get(
+  //       `https://api.breezometer.com/air-quality/v2/current-conditions?lat=${res.coords.latitude}&lon=${res.coords.longitude}&key=5d987a480bbf4894bef1059af925ace0&features=breezometer_aqi,local_aqi,health_recommendations,sources_and_effects,pollutants_concentrations,pollutants_aqi_information`
+  //     );
+  //       console.log(response.data.data.health_recommendations)
+  //     setReccomendata(response.data.data.health_recommendations);
+  //     setAqi(response.data.data.indexes.ind_cpcb.aqi);
+  //     setQuality(response.data.data.indexes.baqi.category);
+  //     setColor(response.data.data.indexes.baqi.color);
+  //     console.log(response.data.data.pollutants);
+  //     const arr = Object.entries(response.data.data.pollutants).map((e) => ({
+  //       [e[0]]: e[1],
+  //     }));
+  //     const newArr = arr.map((val) => {
+  //       return {
+  //         gases: Object.keys(val)[0],
+  //         amount: Object.values(val)[0].concentration.value,
+  //       };
+  //     });
 
-      setReccomendata(response.data.data.health_recommendations);
-      setAqi(response.data.data.indexes.ind_cpcb.aqi);
-      setQuality(response.data.data.indexes.baqi.category);
-      setColor(response.data.data.indexes.baqi.color);
-      const arr = Object.entries(response.data.data.pollutants).map((e) => ({
-        [e[0]]: e[1],
-      }));
-      // console.log(arr);
-      const newArr = arr.map((val) => {
-        return {
-          gases: Object.keys(val)[0],
-          amount: Object.values(val)[0].concentration.value,
-        };
-      });
-
-      setChartData(newArr);
-    });
-  }, []);
+  //     setChartData(newArr);
+  //   });
+  // }, [personalReccomendata]);
 
   const handleSelect = (e) => {
     e.preventDefault();
     if (e.target.value !== "") {
-      setpersonalReccomendata(reccomendata[e.target.value]);
+      setpersonalReccomendata(e.target.value);
     }
   };
 

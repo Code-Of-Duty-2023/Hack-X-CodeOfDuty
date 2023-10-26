@@ -32,7 +32,7 @@ const Header1 = () => {
   };
   const loginHandler = async () => {
     await axios.post("http://localhost:8000/users/login");
-    localStorage.setItem("token", "");
+    await localStorage.setItem("token", "");
     navigate("/login");
   };
 

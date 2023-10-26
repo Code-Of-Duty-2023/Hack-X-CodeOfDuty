@@ -29,7 +29,7 @@ const Signup = () => {
     ) {
       return toast.error("All fields are mandatory !!", {
         position: "bottom-right",
-        autoClose: 2000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -38,8 +38,8 @@ const Signup = () => {
       });
     }
 
-    if (password.length < 7) {
-      return toast.error("Password must be of atleast 7 characters !!", {
+    if (password.length < 6) {
+      return toast.error("Password must be of atleast 6 characters !!", {
         position: "bottom-right",
         autoClose: 2000,
         hideProgressBar: false,

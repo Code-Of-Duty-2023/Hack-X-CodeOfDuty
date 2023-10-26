@@ -56,6 +56,7 @@ const Home = () => {
         </div>
         <div className="landrightbottom">
           <button
+            
             className="landbtn"
             onClick={() => navigate("/organiseplantation")}
           >

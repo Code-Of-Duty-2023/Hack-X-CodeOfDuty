@@ -25,19 +25,19 @@ router.post("/users", async (req, res) => {
 
 router.post("/users/login", async (req, res) => {
   try {
-    const user = await User.findByCredentials(
+    const userResponse = await User.findByCredentials(
       req.body.email,
       req.body.password
     );
-    if (!user) res.status(400).send("No user found!!");
-
+    if (userResponse.error)return res.status(400).send("No user found, " + userResponse.error);
+      const user=userResponse.user;
     const token = await user.generateAuthToken(user);
     user.set("token", token);
     userObj = { ...user._doc, token };
     res.status(201).send(userObj);
   } catch (err) {
-    console.log(err);
-    res.status(400).send();
+    // console.log(err);
+    res.status(400).send(JSON.stringify(err));
   }
 });
 

@@ -62,7 +62,7 @@ router.post('/helpanimals', async (req, res) => {
 
     try {
         await animaldetail.save()
-        sendEmail(req.body.name, req.body.address, req.body.landmark, req.body.zip, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmkOxpAT09fufPpLDuYGSvGqx-MwxYcgcI-Gu-agSc1g&s', 'Help Stray Animals');
+        // sendEmail(req.body.name, req.body.address, req.body.landmark, req.body.zip, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmkOxpAT09fufPpLDuYGSvGqx-MwxYcgcI-Gu-agSc1g&s', 'Help Stray Animals');
         res.status(201).send({ msg: 'successfully added' });
     }
     catch (e) {
